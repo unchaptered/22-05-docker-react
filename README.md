@@ -2,6 +2,8 @@
 
 본 프로젝트는 _2022년 5월 22일_ 에 작성되었습니다.
 
+docker-test-react 는 `싱글 컨테이너 애플리케이션` 입니다.
+
 ```
 root
 ├ public/               Static Files
