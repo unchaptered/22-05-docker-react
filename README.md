@@ -1,70 +1,22 @@
-# Getting Started with Create React App
+# 22-05-docker-test-react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Command
 
-In the project directory, you can run:
+docker build -f Dockerfile.dev . -t unchaptered/docker-react-app
 
-### `npm start`
+docker run -p 3000:3000 unchaptered/docker-react-app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v ${pwd}:/usr/src/app unchaptered/docker-react-app 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v ${pwd}:/usr/src/app unchaptered/docker-react-app -e CHOKIDAR_USEPOLLING=false
 
-### `npm test`
+docker run -it -p 3000:3000 -v /usr/src/app/node_modules -v ${pwd}:/usr/src/app unchaptered/docker-react-app -e CHOKIDAR_USEPOLLING=true
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+docker run -it --rm -v /usr/src/app/node_modules -v ${pwd}:/usr/src/app unchaptered/docker-react-app -e CHOKIDAR_USEPOLLING=true sample:dev
 
-### `npm run build`
+### volume 이 미작동하는 경우
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Windows 운영체제에서 react 에 volume 으로 watch 를 하려면, Dockerfile.* 에 다음의 환경변수를 넣어줘야 합니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ENV CHOKIDAR_USEPOLLING=true
