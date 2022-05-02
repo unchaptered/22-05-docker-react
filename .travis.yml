@@ -17,6 +17,27 @@ before_install:
 script:
   - docker run -e CI=true unchaptered/docker-react-app npm run test -- --coverage
 
-# 테스트 성공 후 할 일
-after_success:
-  - ehco "Test Success"
+# AWS 연관 설정
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "docker-react"
+  env: "Dockerreact-env"
+  bucket_name: "elasticbeanstalk-ap-northeast-2-404540290465"
+  bucket_path: "docker-react"
+  on:
+    branch: main
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_ACCESS_KEY
+
+# deploy
+## provider: 외부 서비스 표시(s3, elasticbeanstalk, firebase 등등)
+## region: 현재 사용하고 있는 aws 서비스가 위치하고 있는 물리적 장소
+## app : 생성된 어플리케이션 이름 (docker-react-app)
+## env : 생성된 어플리케이션 이름이 변형된 형태 (생략 시, DockerReactApp-env)
+## bucket_name : 해당 elasticbeanstalk 을 위한 s3 버켓 이름
+##                travis-ci 에서 elasticbeanstalk 으로 파일을 보내기 전에 압축을 해서 s3 bucket 으로 발송
+##                elastic beanstalk 이 생성되면, 따라서 s3 버킷이 생성됩니다.
+## bucket_path : 어플리케이션 이름과 동일
+## on:
+### branch : 어떤 브랜치에 Push 를 할 때, AWS 에 배포를 할 것인지.
