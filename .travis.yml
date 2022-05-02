@@ -27,8 +27,8 @@ deploy:
   bucket_path: "docker-react"
   on:
     branch: main
-access_key_id: $AWS_ACCESS_KEY
-secret_access_key: $AWS_SECRET_ACCESS_KEY
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
 
 # deploy
 ## provider: 외부 서비스 표시(s3, elasticbeanstalk, firebase 등등)
