@@ -1,7 +1,8 @@
 {
   "name": "22-05-docker-test-react",
   "version": "0.1.0",
-  "private": true,
+  "description": "docker test project - react , from 2022-05-02",
+  "author": "unchaptered",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
