@@ -12,3 +12,13 @@ services:     # 이 곳에 실행하려는 컨테이너들을 정의
     environment:
       - CHOKIDAR_USEPOLLING=true          
     stdin_open: true
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: ["npm", "run", "test"]
